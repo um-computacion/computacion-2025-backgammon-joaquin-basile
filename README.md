@@ -1,5 +1,7 @@
 # Backgammon en Python 
 
+Alumno: Joaquin Basile
+
 ---
 ## Entorno desarrollo 🛠️
 
