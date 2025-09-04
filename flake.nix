@@ -14,7 +14,19 @@
       packages = [
         pkgs.zsh
         (pkgs.python3.withPackages (ps: with ps; [
+          pytest
           coverage
+          requests
+          pandas
+          numpy
+          matplotlib
+          seaborn
+          scipy
+          scikit-learn
+          statsmodels
+          lxml
+          beautifulsoup4
+          pylint
         ]))
       ];
 
