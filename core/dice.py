@@ -1,3 +1,4 @@
+import random
 class Dice:
     '''
     Maneja la logica de tiradas
@@ -12,15 +13,19 @@ class Dice:
     '''
     def __init__(self, dice_number=2):
         self.__dice_number: int = dice_number
+        self.__values: list[int] = []
 
     def roll(self)-> list[int]:
-        return []
+        self.__values = []
+        for _ in range(self.__dice_number):
+            self.__values.append(random.randint(1, 6))
+        return self.__values
 
     def set_dice_number(self, new_number: int):
-        pass
+        self.__dice_number = new_number
 
     def get_dice_number(self)-> int:
-        pass
+        return self.__dice_number
 
     def get_values(self)-> list[int]:
-        return []
+        return self.__values
