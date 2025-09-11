@@ -13,6 +13,7 @@
     devShells.x86_64-linux.default = pkgs.mkShell {
       packages = [
         pkgs.zsh
+        pkgs.gnumake42
         (pkgs.python3.withPackages (ps: with ps; [
           pytest
           coverage
