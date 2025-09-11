@@ -1,7 +1,5 @@
 ************* Module test.py
 test.py:1:0: F0001: No module named test.py (fatal)
-************* Module main
-main.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 
 -----------------------------------
 Your code has been rated at 0.00/10
