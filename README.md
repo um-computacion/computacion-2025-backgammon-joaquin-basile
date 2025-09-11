@@ -5,12 +5,11 @@ Alumno: Joaquin Basile
 ---
 ## Entorno desarrollo 🛠️
 
-### Para correr el codigo se puede:
-
-- Descargar la version de python manualmente
-y luego instalar las librerias especificadas en ***requirements.txt***
-
-- Usar nix para levantar una dev-shell(recomendado)
+### Requisitos:
+- Python 3.13
+- Librerias en requirements.txt
+- Make
+*Se puede instalar manualmente todo (no recomendado) o usar nix-shell*
 
 ### Nix dev-shell 󱄅
 #### Instalar nix
@@ -40,7 +39,12 @@ experimental-features = nix-command flakes
   ```sh 
   nix develop
   ```
-Listo deberias tener la version de python y sus correspondientes librerias disponibles en tu terminal
+Listo deberias tener la version de python, sus librerias y herramientas extras usadas en el proyecto
+
+### Ejecutar los tests 🧪
+``` sh
+make test
+```
 
 ---
 

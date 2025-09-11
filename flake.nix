@@ -13,7 +13,8 @@
     devShells.x86_64-linux.default = pkgs.mkShell {
       packages = [
         pkgs.zsh
-        (pkgs.python3.withPackages (ps: with ps; [
+        pkgs.gnumake42
+        (pkgs.python313.withPackages (ps: with ps; [
           pytest
           coverage
           requests
