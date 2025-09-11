@@ -14,7 +14,7 @@
       packages = [
         pkgs.zsh
         pkgs.gnumake42
-        (pkgs.python3.withPackages (ps: with ps; [
+        (pkgs.python313.withPackages (ps: with ps; [
           pytest
           coverage
           requests
