@@ -24,4 +24,7 @@ class Point():
         pass
 
     def del_checker(self):
-        pass
+        # if self.__quantity > 0:
+        #     self.__quantity -= 1
+        # else:
+        #     raise NoCheckers()
