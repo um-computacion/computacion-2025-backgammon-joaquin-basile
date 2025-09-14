@@ -1,3 +1,5 @@
+from core.exceptions import InvalidMove, NoCheckers
+
 class Point():
     '''
     Representa una aguja que contiene fichas
@@ -15,16 +17,25 @@ class Point():
         self.__quantity = quantity
 
     def get_quantity(self):
-        pass
+        return self.__quantity
 
     def get_color(self):
-        pass
+        return self.__color
 
-    def add_checker(self, color: str)-> bool:
-        pass
+    def add_checker(self, in_color: str)-> bool:
+        if self.__color == in_color:
+            self.__quantity += 1
+            return False
+
+        if self.__quantity <= 1:
+            self.__color = in_color
+            self.__quantity = 1
+            return True
+        else:
+            raise InvalidMove()
 
     def del_checker(self):
-        # if self.__quantity > 0:
-        #     self.__quantity -= 1
-        # else:
-        #     raise NoCheckers()
+        if self.__quantity > 0:
+            self.__quantity -= 1
+        else:
+            raise NoCheckers()
