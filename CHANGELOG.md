@@ -23,6 +23,13 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Documentación de reglas del juego en README.md
 - Documentación de justificación de clases en JUSTIFICACION.md
 - Diagrama de arquitectura del juego (backgammon-planing.excalidraw)
+- **Infraestructura de testing y calidad de código:**
+  - Workflow de CI/CD con GitHub Actions (`.github/workflows/CI.yml`)
+  - Tests unitarios para las clases `Dice` y `Point` (`tests/test_dice.py`, `tests/test_point.py`)
+  - Configuración de coverage con `.coveragerc`
+  - Configuración de pylint con `.pylintrc`
+  - Reportes automatizados de coverage y calidad de código (`REPORTS.md`)
+  - Script para generación automática de reportes (`generate_reports.py`)
 
 ### Changed
 - Actualizado README.md con reglas simplificadas del juego
@@ -33,3 +40,5 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Se agrego las clases `Judge` y `Scheduler` para respetar los principios SOLID
 - El proyecto utiliza Nix para el manejo del entorno de desarrollo
 - Estructura de directorios organizada en `core/`, `cli/`, `test/`, y `pygame_ui/`
+- **Coverage actual: 100% en las clases implementadas (`Dice`, `Point`, `exceptions`)**
+- **Integración continua configurada para ejecutar tests y generar reportes automáticamente**
