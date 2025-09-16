@@ -8,6 +8,19 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 ## [Unreleased]
 
 ### Added
+- Logica y tests de las clases:
+    - `Point`
+    - `Dice`
+- Archivo Makefile
+
+### Changed
+- Flake.nix para agregar make
+
+### Fixed
+- Error de pylint acerca de el archivo main.py pero sigue fallando porque espera un archivo test.py
+
+## [v0.1.0]
+### Added
 - Estructura inicial del proyecto con clases principales del núcleo
 - Clases principales del juego:
   - `Backgammon`: Controlador principal del flujo del juego
@@ -23,6 +36,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Documentación de reglas del juego en README.md
 - Documentación de justificación de clases en JUSTIFICACION.md
 - Diagrama de arquitectura del juego (backgammon-planing.excalidraw)
+- Nix shell
 
 ### Changed
 - Actualizado README.md con reglas simplificadas del juego
