@@ -4,7 +4,8 @@ cli/__init__.py             0      0   100%
 core/__init__.py            0      0   100%
 core/dice.py               16      0   100%
 core/exceptions.py          4      0   100%
+core/player.py             13      1    92%   12
 core/point.py              22      0   100%
 pygame_ui/__init__.py       0      0   100%
 -----------------------------------------------------
-TOTAL                      42      0   100%
+TOTAL                      55      1    98%
