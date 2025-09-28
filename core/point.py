@@ -4,7 +4,7 @@ class Point():
     '''
     Representa una aguja que contiene fichas
     Attributes:
-        color (str): El color de la ficha ('w' o 'b')
+        color (str): El color de la ficha ('wh' o 'bk')
         quantity (int): La cantidad de fichas en la aguja
     Methods:
         get_quantity(): Devuelve cuantas fichas hay en la aguja
@@ -22,7 +22,7 @@ class Point():
     def get_color(self):
         return self.__color
 
-    def add_checker(self, in_color: str)-> bool:
+    def add_checker(self, color: str)-> bool:
         if self.__color == in_color:
             self.__quantity += 1
             return False
