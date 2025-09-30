@@ -1,5 +1,6 @@
 from core.point import Point
 from core.const import black, white
+from core.exceptions import InvalidMove 
 class Board:
     '''
     Maneja la logica de casillas y fichas
@@ -29,16 +30,15 @@ class Board:
     
     def move_checker(self, player, from_pos, dice_number):
         pos_to_move = from_pos + (dice_number * player.get_sign())
-        try:
-            self.__points[pos_to_move].add_hecker(player.get_color())
-        except:
-            raise Invalid
-
+        self.__points[pos_to_move].add_checker(player.get_color())
         self.__points[from_pos]
 
-        
     def move_from_bar(self, player, dice_number):
-        pass
-        
+        pos_to_move = (dice_number - 1) * player.get_sign()
+        self.__pints[pos_to_move].add_checker(player.get_color())
+        self.__bar[player.get_color()] -= 1
+
     def get_board_state(self)-> list[Point]:
-        return
+        self.__points 
+
+        
