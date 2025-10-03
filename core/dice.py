@@ -13,10 +13,10 @@ class Dice:
     '''
     def __init__(self, dice_number=2):
         self.__dice_number: int = dice_number
-        self.__values: list[int] = []
+        self.__values: list[int] = [0, 0]
 
     def roll(self)-> list[int]:
-        self.__values = []
+        self.__values = [],
         for _ in range(self.__dice_number):
             self.__values.append(random.randint(1, 6))
         return self.__values
