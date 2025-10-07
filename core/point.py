@@ -16,25 +16,25 @@ class Point():
         self.__color = color
         self.__quantity = quantity
 
-    def get_quantity(self):
+    def get_quantity(self)-> int:
         return self.__quantity
 
-    def get_color(self):
+    def get_color(self)-> str:
         return self.__color
 
     def add_checker(self, color: str)-> bool:
-        if self.__color == in_color:
+        if self.__color == color:
             self.__quantity += 1
             return False
 
         if self.__quantity <= 1:
-            self.__color = in_color
+            self.__color = color
             self.__quantity = 1
             return True
         else:
             raise InvalidMove()
 
-    def del_checker(self):
+    def del_checker(self)-> None:
         if self.__quantity > 0:
             self.__quantity -= 1
         else:

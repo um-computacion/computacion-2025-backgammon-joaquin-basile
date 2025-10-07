@@ -1,6 +1,7 @@
 from core.point import Point
 from core.const import black, white
 from core.exceptions import InvalidMove 
+
 class Board:
     '''
     Maneja la logica de casillas y fichas
@@ -28,17 +29,20 @@ class Board:
     def is_checker_on_bar(self, player)-> bool:
         return self.__bar[player.get_color()] > 0
     
+    # TODO Todavia se debe verificar si se salen del tablero las fichas
     def move_checker(self, player, from_pos, dice_number):
         pos_to_move = from_pos + (dice_number * player.get_sign())
-        self.__points[pos_to_move].add_checker(player.get_color())
-        self.__points[from_pos]
+        stole = self.__points[pos_to_move].add_checker(player.get_color())
+        self.__points[from_pos].del_checker()
+
+        if stole:
+            opponent_color = white if player.get_color() == black else black
+            self.__bar[opponent_color] += 1
 
     def move_from_bar(self, player, dice_number):
         pos_to_move = (dice_number - 1) * player.get_sign()
-        self.__pints[pos_to_move].add_checker(player.get_color())
+        self.__points[pos_to_move].add_checker(player.get_color())
         self.__bar[player.get_color()] -= 1
 
     def get_board_state(self)-> list[Point]:
-        self.__points 
-
-        
+        return self.__points 

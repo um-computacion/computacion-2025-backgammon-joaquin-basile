@@ -12,7 +12,7 @@ class TestPlayer(unittest.TestCase):
 
     def test_get_sign(self):
         player = Player("Joaco", "bk")
-        self.assertEqual(player.get_sign(), -1)
+        self.assertEqual(player.get_sign(), 1)
 
         player2 = Player("Joaco", "wh")
-        self.assertEqual(player2.get_sign(), 1)
+        self.assertEqual(player2.get_sign(), -1)
