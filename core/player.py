@@ -11,13 +11,13 @@ class Player:
         if color != "bk" and color != "wh":
             raise ValueError("El color tiene que ser 'bk' or 'wh'")
         self.__color = color
-        self.__sign = -1 if color == "bk" else 1
+        self.__sign = 1 if color == "bk" else -1
 
-    def get_name(self):
+    def get_name(self)-> str:
         return self.__name
 
-    def get_color(self):
+    def get_color(self)-> str:
         return self.__color
 
-    def get_sign(self):
+    def get_sign(self)-> int:
         return self.__sign
