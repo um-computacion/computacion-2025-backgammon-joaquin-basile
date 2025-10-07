@@ -7,6 +7,21 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 
 ## [Unreleased]
 
+
+## [v0.1.3]
+
+### Added
+- Logica clase Board
+- Test clase Board
+
+## [v0.1.2]
+
+### Added
+- Logica de la clase player
+- Test clase player
+
+## [v0.1.1]
+
 ### Added
 - Logica y tests de las clases:
     - `Point`
@@ -20,6 +35,7 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.h
 - Error de pylint acerca de el archivo main.py pero sigue fallando porque espera un archivo test.py
 
 ## [v0.1.0]
+
 ### Added
 - Estructura inicial del proyecto con clases principales del núcleo
 - Clases principales del juego:
