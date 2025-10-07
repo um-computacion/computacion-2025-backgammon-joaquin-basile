@@ -23,6 +23,18 @@ tests/test_point.py:23:4: C0116: Missing function or method docstring (missing-f
 tests/test_point.py:30:4: C0116: Missing function or method docstring (missing-function-docstring)
 tests/test_point.py:37:4: C0116: Missing function or method docstring (missing-function-docstring)
 tests/test_point.py:43:4: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module tests.test_board
+tests/test_board.py:59:0: C0305: Trailing newlines (trailing-newlines)
+tests/test_board.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+tests/test_board.py:6:0: C0115: Missing class docstring (missing-class-docstring)
+tests/test_board.py:10:8: W0212: Access to a protected member _Board__bar of a client class (protected-access)
+tests/test_board.py:15:4: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_board.py:21:4: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_board.py:33:4: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_board.py:42:4: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_board.py:42:4: E0102: method already defined line 15 (function-redefined)
+tests/test_board.py:49:4: C0116: Missing function or method docstring (missing-function-docstring)
+tests/test_board.py:54:4: C0116: Missing function or method docstring (missing-function-docstring)
 ************* Module core.judge
 core/judge.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 core/judge.py:12:4: W2301: Unnecessary ellipsis constant (unnecessary-ellipsis)
@@ -35,16 +47,26 @@ core/point.py:22:4: C0116: Missing function or method docstring (missing-functio
 core/point.py:25:4: C0116: Missing function or method docstring (missing-function-docstring)
 core/point.py:30:8: R1705: Unnecessary "else" after "return", remove the "else" and de-indent the code inside it (no-else-return)
 core/point.py:37:4: C0116: Missing function or method docstring (missing-function-docstring)
+************* Module core.const
+core/const.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+core/const.py:1:0: C0103: Constant name "black" doesn't conform to UPPER_CASE naming style (invalid-name)
+core/const.py:2:0: C0103: Constant name "white" doesn't conform to UPPER_CASE naming style (invalid-name)
 ************* Module core.scheduler
 core/scheduler.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 core/scheduler.py:10:4: W2301: Unnecessary ellipsis constant (unnecessary-ellipsis)
 core/scheduler.py:1:0: R0903: Too few public methods (0/2) (too-few-public-methods)
 ************* Module core.board
-core/board.py:11:0: C0301: Line too long (118/100) (line-too-long)
-core/board.py:15:0: C0305: Trailing newlines (trailing-newlines)
+core/board.py:3:39: C0303: Trailing whitespace (trailing-whitespace)
+core/board.py:31:0: C0303: Trailing whitespace (trailing-whitespace)
+core/board.py:48:28: C0303: Trailing whitespace (trailing-whitespace)
+core/board.py:32:5: W0511: TODO Todavia se debe verificar si se salen del tablero las fichas (fixme)
 core/board.py:1:0: C0114: Missing module docstring (missing-module-docstring)
-core/board.py:14:4: W2301: Unnecessary ellipsis constant (unnecessary-ellipsis)
-core/board.py:1:0: R0903: Too few public methods (0/2) (too-few-public-methods)
+tests/test_board.py:10:8: C0103: Attribute name "_Board__bar" doesn't conform to snake_case naming style (invalid-name)
+core/board.py:29:4: C0116: Missing function or method docstring (missing-function-docstring)
+core/board.py:33:4: C0116: Missing function or method docstring (missing-function-docstring)
+core/board.py:42:4: C0116: Missing function or method docstring (missing-function-docstring)
+core/board.py:47:4: C0116: Missing function or method docstring (missing-function-docstring)
+core/board.py:3:0: W0611: Unused InvalidMove imported from core.exceptions (unused-import)
 ************* Module core.exceptions
 core/exceptions.py:1:0: C0114: Missing module docstring (missing-module-docstring)
 core/exceptions.py:3:4: W0107: Unnecessary pass statement (unnecessary-pass)
@@ -75,5 +97,5 @@ pygame_ui/pygame_ui.py:5:4: W2301: Unnecessary ellipsis constant (unnecessary-el
 pygame_ui/pygame_ui.py:1:0: R0903: Too few public methods (0/2) (too-few-public-methods)
 
 -----------------------------------
-Your code has been rated at 5.85/10
+Your code has been rated at 5.95/10
 
