@@ -16,7 +16,7 @@ class Dice:
         self.__values: list[int] = [0, 0]
 
     def roll(self)-> list[int]:
-        self.__values = [],
+        self.__values = []
         for _ in range(self.__dice_number):
             self.__values.append(random.randint(1, 6))
         return self.__values

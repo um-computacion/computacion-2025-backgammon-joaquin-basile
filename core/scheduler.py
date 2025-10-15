@@ -20,8 +20,9 @@ class Scheduler:
     def start(self, starter_player: Player):
         self.__turn = starter_player
 
-    def get_turn(self):
+    def get_turn(self)-> Player:
         return self.__turn
     
-    def next_turn(self):
+    def next_turn(self)-> Player:
         self.__turn = self.__player1 if self.__turn is self.__player2 else self.__player2
+        return self.__turn
