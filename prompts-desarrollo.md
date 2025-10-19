@@ -1,6 +1,6 @@
 ## Promt 15/10
 ### Promt:
-[Imagen de avante neovim][./screenshots/image.png]
+![Imagen de avante neovim][./screenshots/image.png]
 ### Codigo:
 ``` python
     def setUp(self):

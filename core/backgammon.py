@@ -3,6 +3,7 @@ from core.board import Board
 from core.dice import Dice
 from core.scheduler import Scheduler
 from core.judge import Judge
+from core.const import black, white
 
 class Backgammon:
     '''
@@ -18,21 +19,26 @@ class Backgammon:
     '''
     def __init__(
             self, 
-            player1: Player,
-            player2: Player,
             board: Board, 
             dice: Dice,
             scheduler: Scheduler, 
             judge: Judge
         ):
-        self.__player1 = player1
-        self.__player2 = player2
+        self.__player1: Player
+        self.__player2: Player 
         self.__dice = dice
         self.__board = board 
         self.__scheduler = scheduler 
         self.__judge = judge
     
-    def start_game(self)-> dict[str, int], Player:
+    def with_players(self, name1, name2)-> None:
+        self.__player1 = Player(name1, black)
+        self.__player2 = Player(name2, white)
+
+    def start_game(self)-> tuple[dict[str, int], Player]:
+        """
+        Inicia el juego y elige quien comienza
+        """
         while self.__dice.get_values()[0] == self.__dice.get_values()[1]:
             self.__dice.roll()
         result = {name1: self.__dice.get_values()[0], name2: self.__dice.get_values()[1]}
@@ -49,17 +55,26 @@ class Backgammon:
     def get_board_state(self)-> list[Point]:
         return self.__board.get_board_state()
 
-    def move_from_bar(self, dice: int):
-        current_player = self.__scheduler.get_turn()
-        dice_numbers = self.__dice.get_values()
-        self.__board.move_from_bar(current_player, dice_numbers[dice])
-
     def move(self, from_pos: int, dice: int):
         """
         Mueve una ficha en el tablero
         Se indica que ficha y tambien cual de los dos dados usar
         """
+        if self.is_checker_on_bar():
+            raise Exception("Hay fichas en el bar, no se puede mover otra ficha")
         current_player = self.__scheduler.get_turn()
         dice_numbers = self.__dice.get_values()
         self.__board.move_checker(current_player, from_pos, dice_numbers[dice])
         self.__judge()
+
+    def move_from_bar(self, dice: int):
+        """
+        Mueve la ficha desde el bar
+        Se indica solo que dado usar
+        """
+        current_player = self.__scheduler.get_turn()
+        dice_numbers = self.__dice.get_values()
+        self.__board.move_from_bar(current_player, dice_numbers[dice])
+
+    def end_game(self): -> bool:
+        return False
