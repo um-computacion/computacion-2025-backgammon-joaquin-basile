@@ -1,8 +1,10 @@
-## Promt 15/10
-### Promt:
-![Imagen de avante neovim][./screenshots/image.png]
-### Codigo:
-``` python
+import unittest
+from core.scheduler import Scheduler
+from core.player import Player
+from core.const import black, white
+from core.backgammon import Backgammon
+
+class TestBackgammon(unittest.TestCase):
     def setUp(self):
 
     def test_start_game(self):
@@ -80,4 +82,3 @@
 
         # Assuming the board and dice are set up for this test
         game.move(0, 0)  # Replace 0, 0 with the actual positions and dice index
-```

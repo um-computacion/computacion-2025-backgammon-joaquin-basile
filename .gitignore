@@ -2,3 +2,5 @@
 __pycache__/
 .env
 .envrc
+.nix-develop-cache
+.nix-develop-cache-1-link
