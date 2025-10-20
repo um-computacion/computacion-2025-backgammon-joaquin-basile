@@ -80,4 +80,7 @@
 
         # Assuming the board and dice are set up for this test
         game.move(0, 0)  # Replace 0, 0 with the actual positions and dice index
+
 ```
+## 20/10
+[Link al chat de copilot][https://github.com/copilot/share/4a1850a6-4384-8c83-9911-424c4019080c]
