@@ -3,6 +3,7 @@ from core.board import Board
 from core.dice import Dice
 from core.scheduler import Scheduler
 from core.judge import Judge
+from core.point import Point
 from core.const import black, white
 
 class Backgammon:
@@ -17,23 +18,18 @@ class Backgammon:
         start_game()-> dict[player: number], starter_player: Inicia el juego tirando los dados y eliguiendo quien comienza
         end_game(): Termina el juego
     '''
-    def __init__(
-            self, 
-            board: Board, 
-            dice: Dice,
-            scheduler: Scheduler, 
-            judge: Judge
-        ):
+    def __init__(self):
         self.__player1: Player
-        self.__player2: Player 
-        self.__dice = dice
-        self.__board = board 
-        self.__scheduler = scheduler 
-        self.__judge = judge
+        self.__player2: Player
+        self.__judge: Judge
+        self.__scheduler: Scheduler 
+        self.__dice = Dice()
+        self.__board = Board() 
     
     def with_players(self, name1, name2)-> None:
         self.__player1 = Player(name1, black)
         self.__player2 = Player(name2, white)
+        self.__scheduler = Scheduler(self.__player1, self.__player2)
 
     def start_game(self)-> tuple[dict[str, int], Player]:
         """
@@ -41,6 +37,8 @@ class Backgammon:
         """
         while self.__dice.get_values()[0] == self.__dice.get_values()[1]:
             self.__dice.roll()
+        name1 = self.__player1.get_name()
+        name2 = self.__player2.get_name()
         result = {name1: self.__dice.get_values()[0], name2: self.__dice.get_values()[1]}
         starter_player = self.__player1 if result[name1] > result[name2] else self.__player2
         self.__scheduler.start(starter_player)
@@ -76,5 +74,5 @@ class Backgammon:
         dice_numbers = self.__dice.get_values()
         self.__board.move_from_bar(current_player, dice_numbers[dice])
 
-    def end_game(self): -> bool:
+    def end_game(self)-> bool:
         return False
