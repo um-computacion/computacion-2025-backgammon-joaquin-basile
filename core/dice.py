@@ -12,20 +12,37 @@ class Dice:
         get_values(): Obtener los valores actuales de los dados
     '''
     def __init__(self, dice_number=2):
-        self.__dice_number: int = dice_number
         self.__values: list[int] = [0, 0]
+        self.__used: list[bool] = [False, False]
 
     def roll(self)-> list[int]:
+        """
+        Gira los dados y establece dos valores nuevos a usar
+        """
+        self.__used = [False, False]
         self.__values = []
-        for _ in range(self.__dice_number):
+        for _ in range(2):
             self.__values.append(random.randint(1, 6))
         return self.__values
 
-    def set_dice_number(self, new_number: int):
-        self.__dice_number = new_number
-
-    def get_dice_number(self)-> int:
-        return self.__dice_number
-
     def get_values(self)-> list[int]:
+        """
+        Devuelve ambos valores
+        """
         return self.__values
+
+    def use_dice(self, index: int)-> int:
+        """
+        Se usa uno de los dados y se marca como usado
+        pasar el numero de dado (1 o 2)
+        """
+        dice = self.__values[index-1]
+        self.__used[index-1] = True
+        return dice 
+
+    def is_use(self, index: int)-> bool:
+        """
+        Devuelve true en caso de que ya se haya usado el dado
+        tambien recibe el numero de dado (1 o 2)
+        """
+        return self.__used[index-1]

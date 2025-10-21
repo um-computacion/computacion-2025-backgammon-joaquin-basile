@@ -1,3 +1,4 @@
+from core.const import black, white
 class Player:
     '''
     Representa a uno de los jugadores
@@ -8,10 +9,10 @@ class Player:
     '''
     def __init__(self, name, color):
         self.__name = name
-        if color != "bk" and color != "wh":
+        if color != black and color != white: 
             raise ValueError("El color tiene que ser 'bk' or 'wh'")
         self.__color = color
-        self.__sign = 1 if color == "bk" else -1
+        self.__sign = 1 if color == black else -1
 
     def get_name(self)-> str:
         return self.__name
@@ -21,3 +22,6 @@ class Player:
 
     def get_sign(self)-> int:
         return self.__sign
+
+    def get_oponent_color(self)-> str:
+        return white if self.get_color() == white else black

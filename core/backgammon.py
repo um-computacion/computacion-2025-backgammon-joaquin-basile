@@ -26,6 +26,12 @@ class Backgammon:
         self.__dice = Dice()
         self.__board = Board() 
     
+    def actual_player(self):
+        return self.__scheduler.get_turn()
+
+    def next_turn(self):
+        self.__scheduler.next_turn()
+
     def with_players(self, name1, name2)-> None:
         self.__player1 = Player(name1, black)
         self.__player2 = Player(name2, white)

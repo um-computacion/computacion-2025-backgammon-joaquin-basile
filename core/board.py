@@ -31,19 +31,20 @@ class Board:
     
     def move_checker(self, player, from_pos, dice_number):
         board_backup = self.__points.copy()
+        point_color = self.__points[from_pos].get_color()
+        if player.get_oponent_color() == point_color:
+            raise Exception("No se puede mover fichas que no sean tuyas")
 
-        if self.__points[from_pos].get_color() != player.get_color():
-            raise InvalidMove("No puedes mover una ficha que no es tuya.")
         pos_to_move = from_pos + (dice_number * player.get_sign())
+
         try:
             self.__points[from_pos].del_checker()
             stole = self.__points[pos_to_move].add_checker(player.get_color())
+            if stole:
+                self.__bar[player.get_oponent_color()] += 1
         except:
             self.__points = board_backup
 
-        if stole:
-            opponent_color = white if player.get_color() == black else black
-            self.__bar[opponent_color] += 1
 
     def move_from_bar(self, player, dice_number):
         pos_to_move = (dice_number - 1) * player.get_sign()

@@ -2,6 +2,5 @@ test:
 	python -m unittest discover
 develop:
 	nix develop ./.nix-develop-cache
-
-# cli:
-# 	python -m cli
+cache:
+	nix develop --profile .nix‑develop-cache --command true

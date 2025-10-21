@@ -1,5 +1,6 @@
 from core.backgammon import Backgammon
 from core.const import black, white
+from time import sleep
 
 class CLI:
     '''
@@ -15,25 +16,40 @@ class CLI:
             name2 = input("Elegir el nombre jugador blanco: ")
             self.__backgammon.with_players(name1, name2)
             print("Se estan girando los dados para decidir quien comienza...")
+            sleep(1.2)
             result, starter = self.__backgammon.start_game()
-            print("Los resultados fueron: ", result)
-            print("El jugador ", starter.get_name(), " comienza!!")
+            for v in result:
+                sleep(1)
+                print(v , "saco ", result[v])
 
             while not self.__backgammon.end_game():
+                sleep(1)
+                player = self.__backgammon.actual_player()
+                print("Turno de ", player.get_name())
+                print("Juegan las ", player.get_color())
                 print("Se estan tirando los dados...")
                 dados = self.__backgammon.trow_dice()
+                sleep(2)
                 print("Primer dado: ", dados[0])
                 print("Segundo dado: ", dados[1])
-                for i in range(2):
-                    self.display_board()
-                    pos = int(input("Que ficha mover: ")) - 1
-                    dado = int(input("Que dado usar: "))
-                    self.__backgammon.move(pos, dado)
-
+                self.turn()
+                self.__backgammon.next_turn()
 
         except KeyboardInterrupt:
             print("\nSe termino el juego!")
 
+    def turn(self):
+        try:
+            for i in range(2):
+                self.display_board()
+                pos = int(input("Que ficha mover: ")) - 1
+                dado = int(input("Que dado usar: "))
+                self.__backgammon.move(pos, dado)
+        except Exception as e:
+            print(e)
+            self.turn()
+        self.__backgammon.next_turn()
+        
     def display_board(self):
         points = self.__backgammon.get_board_state()
         bar = self.__backgammon.get_bar_state()
@@ -111,6 +127,6 @@ class CLI:
 
         # Leyenda
         print("\n" + "-"*70)
-        print(f"Leyenda: {symbols[black]} = Negro (bk)  |  {symbols[white]} = Blanco (wh)")
+        print(f"Leyenda: {symbols[black]} = Negro (bk) ->  |  {symbols[white]} = Blanco (wh) <-")
         print(f"BAR: Negro {symbols[black]} = {bar[black]}  |  Blanco {symbols[white]} = {bar[white]}")
         print("="*70 + "\n")
