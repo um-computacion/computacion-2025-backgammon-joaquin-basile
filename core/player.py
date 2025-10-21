@@ -23,5 +23,6 @@ class Player:
     def get_sign(self)-> int:
         return self.__sign
 
-    def get_oponent_color(self)-> str:
-        return white if self.get_color() == white else black
+    def get_oponent_color(self) -> str:
+        oponent_color = white if self.__color == black else black
+        return oponent_color

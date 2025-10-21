@@ -25,7 +25,7 @@ class Point():
 
     def add_checker(self, color: str)-> bool:
         if self.__color == "":
-            self.__color == color
+            self.__color = color  # Asignar el color correctamente
             self.__quantity += 1
             return False
 

@@ -42,7 +42,7 @@ class CLI:
         try:
             for i in range(2):
                 self.display_board()
-                pos = int(input("Que ficha mover: ")) - 1
+                pos = int(input("Que ficha mover: "))
                 dado = int(input("Que dado usar: "))
                 self.__backgammon.move(pos, dado)
         except Exception as e:

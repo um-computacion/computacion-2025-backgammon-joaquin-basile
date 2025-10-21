@@ -29,22 +29,19 @@ class Board:
     def is_checker_on_bar(self, player)-> bool:
         return self.__bar[player.get_color()] > 0
     
-    def move_checker(self, player, from_pos, dice_number):
-        board_backup = self.__points.copy()
-        point_color = self.__points[from_pos].get_color()
-        if player.get_oponent_color() == point_color:
-            raise Exception("No se puede mover fichas que no sean tuyas")
-
-        pos_to_move = from_pos + (dice_number * player.get_sign())
-
+    def move_checker(self, player, index, dice_number):
+        from_pos = index - 1
+        pos_to_move = (from_pos) + (dice_number * player.get_sign())
+        backup_points = self.__points.copy()
+        stole: bool
         try:
             self.__points[from_pos].del_checker()
             stole = self.__points[pos_to_move].add_checker(player.get_color())
-            if stole:
-                self.__bar[player.get_oponent_color()] += 1
         except:
-            self.__points = board_backup
-
+            self.__points = backup_points
+            raise InvalidMove("Movimiento invalido") 
+        if stole:
+            self.__bar[player.get_oponent_color()] += 1
 
     def move_from_bar(self, player, dice_number):
         pos_to_move = (dice_number - 1) * player.get_sign()

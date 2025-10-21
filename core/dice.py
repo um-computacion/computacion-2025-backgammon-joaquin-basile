@@ -11,7 +11,7 @@ class Dice:
         set_dice_number(n): Establecer la cantidad de dados a usar
         get_values(): Obtener los valores actuales de los dados
     '''
-    def __init__(self, dice_number=2):
+    def __init__(self):
         self.__values: list[int] = [0, 0]
         self.__used: list[bool] = [False, False]
 
