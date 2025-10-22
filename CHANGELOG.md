@@ -1,0 +1,65 @@
+# Changelog
+
+Todos los cambios notables de este proyecto serán documentados en este archivo.
+
+El formato está basado en [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
+y este proyecto adhiere a [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [Unreleased]
+
+
+## [v0.1.3]
+
+### Added
+- Logica clase Board
+- Test clase Board
+
+## [v0.1.2]
+
+### Added
+- Logica de la clase player
+- Test clase player
+
+## [v0.1.1]
+
+### Added
+- Logica y tests de las clases:
+    - `Point`
+    - `Dice`
+- Archivo Makefile
+
+### Changed
+- Flake.nix para agregar make
+
+### Fixed
+- Error de pylint acerca de el archivo main.py pero sigue fallando porque espera un archivo test.py
+
+## [v0.1.0]
+
+### Added
+- Estructura inicial del proyecto con clases principales del núcleo
+- Clases principales del juego:
+  - `Backgammon`: Controlador principal del flujo del juego
+  - `Board`: Manejo de lógica del tablero y fichas
+  - `Player`: Representación de jugadores
+  - `Dice`: Lógica de tirada de dados
+  - `Point`: Representación de agujas/casillas que contienen fichas
+  - `Judge`: Lógica para determinar el ganador del juego
+  - `Scheduler`: Manejo de turnos
+- Clases de interfaz de usuario:
+  - `CLI`: Interfaz de línea de comandos (cli/cli.py)
+  - `PygameUI`: Interfaz gráfica usando pygame (pygame_ui/pygame_ui.py)
+- Documentación de reglas del juego en README.md
+- Documentación de justificación de clases en JUSTIFICACION.md
+- Diagrama de arquitectura del juego (backgammon-planing.excalidraw)
+- Nix shell
+
+### Changed
+- Actualizado README.md con reglas simplificadas del juego
+- Mejorado JUSTIFICACION.md con explicación de las clases elegidas
+
+### Technical Notes
+- Se remplazo la clase `Checker` por la clase `Point` por motivos de eficiencia a la hora de guardar fichas 
+- Se agrego las clases `Judge` y `Scheduler` para respetar los principios SOLID
+- El proyecto utiliza Nix para el manejo del entorno de desarrollo
+- Estructura de directorios organizada en `core/`, `cli/`, `test/`, y `pygame_ui/`

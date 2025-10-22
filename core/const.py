@@ -1,0 +1,2 @@
+black = "bk"
+white = "wh"
