@@ -1,4 +1,5 @@
 from core.exceptions import InvalidMove, NoCheckers
+from core.const import black, white
 
 class Point():
     '''
@@ -23,6 +24,11 @@ class Point():
         return self.__color
 
     def add_checker(self, color: str)-> bool:
+        if self.__color == "":
+            self.__color = color  # Asignar el color correctamente
+            self.__quantity += 1
+            return False
+
         if self.__color == color:
             self.__quantity += 1
             return False
@@ -31,6 +37,7 @@ class Point():
             self.__color = color
             self.__quantity = 1
             return True
+
         else:
             raise InvalidMove()
 

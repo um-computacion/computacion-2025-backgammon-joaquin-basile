@@ -25,7 +25,13 @@ class Backgammon:
         self.__scheduler: Scheduler 
         self.__dice = Dice()
         self.__board = Board() 
-    
+
+    def actual_player(self):
+        return self.__scheduler.get_turn()
+
+    def next_turn(self):
+        self.__scheduler.next_turn()
+
     def with_players(self, name1, name2)-> None:
         self.__player1 = Player(name1, black)
         self.__player2 = Player(name2, white)
@@ -53,6 +59,9 @@ class Backgammon:
     def get_board_state(self)-> list[Point]:
         return self.__board.get_board_state()
 
+    def get_bar_state(self)-> dict:
+        return self.__board.get_bar_state()
+
     def move(self, from_pos: int, dice: int):
         """
         Mueve una ficha en el tablero
@@ -62,8 +71,7 @@ class Backgammon:
             raise Exception("Hay fichas en el bar, no se puede mover otra ficha")
         current_player = self.__scheduler.get_turn()
         dice_numbers = self.__dice.get_values()
-        self.__board.move_checker(current_player, from_pos, dice_numbers[dice])
-        self.__judge()
+        self.__board.move_checker(current_player, from_pos, self.__dice.use_dice(dice))
 
     def move_from_bar(self, dice: int):
         """

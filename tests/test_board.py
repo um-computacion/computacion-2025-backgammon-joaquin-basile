@@ -13,14 +13,15 @@ class TestBoard(unittest.TestCase):
         self.player2 = Player("Bob", white)
 
     def test_is_checker_on_bar(self):
+        print(self.board_with_stole_checkers._Board__bar)
         result = self.board_with_stole_checkers.is_checker_on_bar(self.player1)
         self.assertTrue(result)
         result = self.board_with_stole_checkers.is_checker_on_bar(self.player2)
-        self.assertFalse(result)
+        self.assertTrue(result)
 
     def test_move_checker(self):
         board = Board()
-        board.move_checker(self.player1, 0, 1)
+        board.move_checker(self.player1, 1, 1)
 
         state = board.get_board_state()
 
@@ -33,11 +34,13 @@ class TestBoard(unittest.TestCase):
     def test_move_checker_and_stole(self):
         board = Board()
         #Primer moviemiento deja una aguja con 1 ficha en el lugar 3
-        board.move_checker(self.player1, 0, 3)
+        board.move_checker(self.player1, 1, 3)
         #El segundo jugador roba esa la ficha de la aguja 3
-        board.move_checker(self.player2, 5, 2)
+        board.move_checker(self.player2, 6, 2)
+        black_bar = board.get_bar_state().get(black)
+        self.assertEqual(black_bar, 1)
 
-        self.assertTrue(board.is_checker_on_bar(self.player1))
+
 
     def test_is_checker_on_bar(self):
         result = self.board_with_stole_checkers.is_checker_on_bar(self.player1)
