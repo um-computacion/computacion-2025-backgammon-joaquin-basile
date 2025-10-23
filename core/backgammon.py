@@ -24,7 +24,7 @@ class Backgammon:
         self.__judge: Judge
         self.__scheduler: Scheduler 
         self.__dice = Dice()
-        self.__board = Board() 
+        self.__board: Board 
 
     def actual_player(self):
         return self.__scheduler.get_turn()
@@ -33,9 +33,15 @@ class Backgammon:
         self.__scheduler.next_turn()
 
     def with_players(self, name1, name2)-> None:
+        """
+        Recive los nombres de los jugadores e inicializa
+        todo lo necesario para que backgammon funcione
+        """
         self.__player1 = Player(name1, black)
         self.__player2 = Player(name2, white)
         self.__scheduler = Scheduler(self.__player1, self.__player2)
+        self.__judge = Judge(self.__player1, self.__player2)
+        self.__board = Board(self.__judge)
 
     def start_game(self)-> tuple[dict[str, int], Player]:
         """

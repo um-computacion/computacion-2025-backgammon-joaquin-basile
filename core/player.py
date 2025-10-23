@@ -1,4 +1,5 @@
 from core.const import black, white
+
 class Player:
     '''
     Representa a uno de los jugadores
