@@ -58,8 +58,3 @@ class TestBoard(unittest.TestCase):
         self.board_with_stole_checkers.move_from_bar(self.player2, 4)
         board = self.board_with_stole_checkers.get_board_state()
         self.assertEqual(board[-3].get_quantity(), 1)
-
-    def test_is_all_checkers_at_final(self):
-        board = Board(self.judge)
-        result = board.is_all_checkers_at_final(self.player2)
-        self.assertFalse(result)

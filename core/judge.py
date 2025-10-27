@@ -1,4 +1,6 @@
 from core.player import Player
+from core.point import Point
+from core.const import black, white
 
 class Judge:
     '''
@@ -25,4 +27,18 @@ class Judge:
 
     def get_points(self):
         return self.__won_checkers
-        
+
+
+    def is_all_checkers_at_final(self, player: Player, board: list[Point])-> bool:
+        color = player.get_color()
+        if color == black:
+            start, end = 18, 24  # Último cuadrante para black
+        else:
+            start, end = 0, 6   # Último cuadrante para white
+
+        checkers_in_final_quadrant = sum(
+            board[i].get_quantity() for i in range(start, end) if board[i].get_color() == color
+        )
+        checker_in_board = sum(point.get_quantity() for point in board if point.get_color() == color)
+
+        return checker_in_board == checkers_in_final_quadrant

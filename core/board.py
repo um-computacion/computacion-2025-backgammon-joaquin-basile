@@ -46,23 +46,6 @@ class Board:
         if stole:
             self.__bar[player.get_oponent_color()] += 1
 
-    def is_all_checkers_at_final(self, player: Player)-> bool:
-        color = player.get_color()
-        if color == black:
-            start, end = 18, 24  # Último cuadrante para black
-        else:
-            start, end = 0, 6   # Último cuadrante para white
-
-        checkers_in_final_quadrant = 0
-        for i in range(start, end):
-            if self.__points[i].get_color() == color:
-                checkers_in_final_quadrant += self.__points[i].get_quantity()
-
-        checker_in_board = sum(point.get_quantity() for point in self.__points if point.get_color() == color)
-
-        return checker_in_board == checkers_in_final_quadrant
-
-
     def move_from_bar(self, player: Player, dice_number: int):
         pos_to_move = (dice_number - 1) * player.get_sign()
         self.__points[pos_to_move].add_checker(player.get_color())

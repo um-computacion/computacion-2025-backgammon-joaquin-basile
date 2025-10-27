@@ -32,6 +32,7 @@
       ];
 
       shell = pkgs.zsh;
+      MAKEFLAGS = "--no-print-directory";
 
       shellHook = ''
         echo -e "\033[1;36m🚀 Bienvenido al entorno de desarrollo del proyecto Backgammon 🚀\033[0m"
