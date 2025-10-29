@@ -35,14 +35,13 @@ class Board:
     def move_checker(self, player: Player, index: int, dice_number: int):
         from_pos = index - 1
         pos_to_move = (from_pos) + (dice_number * player.get_sign())
-        backup_points = self.__points.copy()
-        stole: bool
-        try:
-            self.__points[from_pos].del_checker()
-            stole = self.__points[pos_to_move].add_checker(player.get_color())
-        except:
-            self.__points = backup_points
-            raise InvalidMove("Movimiento invalido") 
+
+        if self.__points[from_pos].get_quantity() < 0:
+            raise InvalidMove("No hay fichas en la posicion indicada")
+
+        stole = self.__points[pos_to_move].add_checker(player.get_color())
+        self.__points[from_pos].del_checker()
+
         if stole:
             self.__bar[player.get_oponent_color()] += 1
 

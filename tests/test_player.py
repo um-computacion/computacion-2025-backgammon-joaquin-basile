@@ -13,10 +13,10 @@ class TestPlayer(unittest.TestCase):
 
     def test_get_sign(self):
         player = Player("Joaco", black)
-        self.assertEqual(player.get_sign(), 1)
+        self.assertEqual(player.get_sign(), -1)
 
         player2 = Player("Joaco", white)
-        self.assertEqual(player2.get_sign(), -1)
+        self.assertEqual(player2.get_sign(), 1)
 
     def test_get_oponent(self):
         player = Player("Joaco", black)

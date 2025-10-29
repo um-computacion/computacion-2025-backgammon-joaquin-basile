@@ -37,6 +37,8 @@ class Backgammon:
         Recive los nombres de los jugadores e inicializa
         todo lo necesario para que backgammon funcione
         """
+        if name1 == name2:
+            raise ValueError("Los nombres de los jugadores no pueden ser iguales")
         self.__player1 = Player(name1, black)
         self.__player2 = Player(name2, white)
         self.__scheduler = Scheduler(self.__player1, self.__player2)
@@ -56,9 +58,18 @@ class Backgammon:
         self.__scheduler.start(starter_player)
         return result, starter_player
 
+    ## Metodos de dice
     def trow_dice(self)-> list[int]:
         return self.__dice.roll()
+    def get_dice_values(self)-> list[int]:
+        return self.__dice.get_values()
+    def get_used_dice(self)-> list[bool]:
+        return self.__dice.get_used()
+    def is_all_dice_used(self)-> bool:
+        return self.__dice.is_all_used()
 
+
+    ## Metodos de board
     def is_checker_on_bar(self)-> bool:
         return self.__board.is_checker_on_bar(self.__scheduler.get_turn())
 
@@ -76,7 +87,6 @@ class Backgammon:
         if self.is_checker_on_bar():
             raise Exception("Hay fichas en el bar, no se puede mover otra ficha")
         current_player = self.__scheduler.get_turn()
-        dice_numbers = self.__dice.get_values()
         self.__board.move_checker(current_player, from_pos, self.__dice.use_dice(dice))
 
     def move_from_bar(self, dice: int):

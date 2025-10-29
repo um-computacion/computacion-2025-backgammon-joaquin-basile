@@ -28,10 +28,7 @@ class CLI:
                 print("Turno de ", player.get_name())
                 print("Juegan las ", player.get_color())
                 print("Se estan tirando los dados...")
-                dados = self.__backgammon.trow_dice()
-                sleep(2)
-                print("Primer dado: ", dados[0])
-                print("Segundo dado: ", dados[1])
+                self.__backgammon.trow_dice()
                 self.turn()
                 self.__backgammon.next_turn()
 
@@ -39,17 +36,25 @@ class CLI:
             print("\nSe termino el juego!")
 
     def turn(self):
+        print("---------------------------------------------------------------------")
+        self.display_board()
+        used = self.__backgammon.get_used_dice()
+        dados = self.__backgammon.get_dice_values()
+        if not used[0]:
+            print("Dado 1: ", dados[0])
+        if not used[1]:
+            print("Dafo 2: ", dados[1])
+        pos = int(input("Que ficha mover (ingresar punto 1-24): "))
+        dice_to_use = int(input("Que dado usar (1 o 2): "))
         try:
-            for i in range(2):
-                self.display_board()
-                pos = int(input("Que ficha mover: "))
-                dado = int(input("Que dado usar: "))
-                self.__backgammon.move(pos, dado)
+            self.__backgammon.move(pos, dice_to_use)
         except Exception as e:
             print(e)
             self.turn()
-        self.__backgammon.next_turn()
-        
+        if not self.__backgammon.is_all_dice_used():
+            self.turn()
+
+
     def display_board(self):
         points = self.__backgammon.get_board_state()
         bar = self.__backgammon.get_bar_state()

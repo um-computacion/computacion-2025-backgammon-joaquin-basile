@@ -42,7 +42,4 @@ class Point():
             raise InvalidMove()
 
     def del_checker(self)-> None:
-        if self.__quantity > 0:
-            self.__quantity -= 1
-        else:
-            raise NoCheckers()
+        self.__quantity -= 1

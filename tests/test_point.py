@@ -35,13 +35,6 @@ class TestPoint(unittest.TestCase):
         self.assertEqual(point.get_quantity(), 4)
         self.assertEqual(point.get_color(), white)
 
-    def test_del_checker_empty(self):
-        point = Point(white, 0)
-        with self.assertRaises(NoCheckers):
-            point.del_checker()
-        self.assertEqual(point.get_quantity(), 0)
-        self.assertEqual(point.get_color(), white)
-
     def test_point_no_color(self):
         point = Point("", 1)
         self.assertEqual(point.get_color(), "")
