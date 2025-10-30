@@ -30,10 +30,17 @@ class Dice:
         Devuelve ambos valores
         """
         return self.__values
+    
+    def get_value(self, index: int)-> int:
+        """
+        Devuelve el valor de un dado
+        pasar el numero de dado (1 o 2)
+        """
+        return self.__values[index-1]
 
     def use_dice(self, index: int)-> int:
         """
-        Se usa uno de los dados y se marca como usado
+        Se marca el dado como usado
         pasar el numero de dado (1 o 2)
         """
         i = index-1
@@ -43,7 +50,6 @@ class Dice:
             raise Exception("El dado ya fue usado")
         dice = self.__values[i]
         self.__used[i] = True
-        return dice 
 
     def get_used(self)-> list[bool]:
         """

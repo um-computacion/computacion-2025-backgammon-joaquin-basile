@@ -35,30 +35,45 @@ class Board:
     def move_checker(self, player: Player, index: int, dice_number: int):
         from_pos = index - 1
         pos_to_move = (from_pos) + (dice_number * player.get_sign())
-
         if self.__points[from_pos].get_quantity() < 0:
             raise InvalidMove("No hay fichas en la posicion indicada")
+        if player.get_color() != self.__points[from_pos]: 
+            raise InvalidMove("La ficha en la posicion indicada no es tuya")
+        
+        if pos_to_move < 0 or pos_to_move > 23:
+            self.move_out_board(player, from_pos, dice_number)
+        else:
+            self.move_in_board(from_pos, pos_to_move)
 
+    def move_in_board(from_pos: int, pos_to_move: int):
         stole = self.__points[pos_to_move].add_checker(player.get_color())
         self.__points[from_pos].del_checker()
-
         if stole:
             self.__bar[player.get_oponent_color()] += 1
 
+    def move_out_board(self, player: Player, from_pos: int, dice_number: int):
+        if not self.__judge.is_all_checkers_at_final(player, self.__points):
+            raise InvalidMove("No todas las fichas estan en el cuadrante final")
+        if not self.__judge.can_checker_exit(player, self.__points):
+            raise InvalidMove("No es posible sacar la ficha con el valor del dado")
+        self.__points[from_pos].del_checker()
+        self.__judge.won_checker(player)
+
     def move_from_bar(self, player: Player, dice_number: int):
-        pos_to_move = (dice_number - 1) * player.get_sign()
-        self.__points[pos_to_move].add_checker(player.get_color())
+        from_pos = 0
+        if player.get_color() == black:
+            from_pos = 24
+        else:
+            from_pos = -1
+        pos_to_move = from_pos + (dice_number * player.get_sign())
+
+        stole = self.__points[pos_to_move].add_checker(player.get_color())
         self.__bar[player.get_color()] -= 1
+        if stole:
+            self.__bar[player.get_oponent_color()] += 1
 
     def get_board_state(self)-> list[Point]:
         return self.__points
     
     def get_bar_state(self)-> dict:
         return self.__bar.copy()
-
-if __name__ == "__main__":
-    p1 = Player("Joaco", black)
-    p2 = Player("Pepe", white)
-    board = Board(Judge(p1, p2))
-    board.is_all_checkers_at_final(p1)
-

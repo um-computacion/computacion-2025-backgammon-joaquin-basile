@@ -84,10 +84,10 @@ class Backgammon:
         Mueve una ficha en el tablero
         Se indica que ficha y tambien cual de los dos dados usar
         """
-        if self.is_checker_on_bar():
-            raise Exception("Hay fichas en el bar, no se puede mover otra ficha")
         current_player = self.__scheduler.get_turn()
-        self.__board.move_checker(current_player, from_pos, self.__dice.use_dice(dice))
+        dice_number = self.__dice.get_value(dice)
+        self.__board.move_checker(current_player, from_pos, dice_number)
+        self.__dice.use_dice(dice)
 
     def move_from_bar(self, dice: int):
         """
@@ -95,8 +95,9 @@ class Backgammon:
         Se indica solo que dado usar
         """
         current_player = self.__scheduler.get_turn()
-        dice_numbers = self.__dice.get_values()
-        self.__board.move_from_bar(current_player, dice_numbers[dice])
+        dice_number = self.__dice.get_value(dice)
+        self.__board.move_checker(current_player, dice_number)
+        self.__dice.use_dice(dice)
 
     def end_game(self)-> bool:
         return False

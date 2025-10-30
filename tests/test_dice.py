@@ -21,12 +21,12 @@ class TestDice(unittest.TestCase):
         dice = Dice()
         initial_values = dice.roll()
 
-        used_value1 = dice.use_dice(1)
-        self.assertEqual(used_value1, initial_values[0])
+        dice.use_dice(1)
+        used_value1 = dice.get_used()[0]
         self.assertTrue(dice.get_used()[0])
 
-        used_value2 = dice.use_dice(2)
-        self.assertEqual(used_value2, initial_values[1])
+        dice.use_dice(2)
+        used_value2 = dice.get_used()[1]
         self.assertTrue(dice.get_used()[1])
 
     def test_use_dice_out_index(self):
