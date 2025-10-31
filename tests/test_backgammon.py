@@ -3,82 +3,49 @@ from core.scheduler import Scheduler
 from core.player import Player
 from core.const import black, white
 from core.backgammon import Backgammon
+from core.dice import Dice
 
-# class TestBackgammon(unittest.TestCase):
-#     def setUp(self):
-#
-#     def test_start_game(self):
-#         player1 = Player("Player 1", black)
-#         player2 = Player("Player 2", white)
-#         board = Board()
-#         dice = Dice()
-#         scheduler = Scheduler(player1, player2)
-#         judge = None  # Replace with a mock or actual Judge instance if needed
-#         game = Backgammon(player1, player2, board, dice, scheduler, judge)
-#
-#         result, starter_player = game.start_game()
-#
-#         self.assertIn(player1.name, result)
-#         self.assertIn(player2.name, result)
-#         self.assertNotEqual(result[player1.name], result[player2.name])
-#         self.assertIn(starter_player, [player1, player2])
-#
-#     def test_trow_dice(self):
-#         dice = Dice()
-#         board = Board()
-#         player1 = Player("Player 1", black)
-#         player2 = Player("Player 2", white)
-#         scheduler = Scheduler(player1, player2)
-#         judge = None  # Replace with a mock or actual Judge instance if needed
-#         game = Backgammon(player1, player2, board, dice, scheduler, judge)
-#
-#         dice_values = game.trow_dice()
-#         self.assertEqual(len(dice_values), 2)
-#         self.assertTrue(all(1 <= value <= 6 for value in dice_values))
-#
-#     def test_is_checker_on_bar(self):
-#         board = Board()
-#         dice = Dice()
-#         player1 = Player("Player 1", black)
-#         player2 = Player("Player 2", white)
-#         scheduler = Scheduler(player1, player2)
-#         judge = None  # Replace with a mock or actual Judge instance if needed
-#         game = Backgammon(player1, player2, board, dice, scheduler, judge)
-#
-#         self.assertFalse(game.is_checker_on_bar())  # Assuming no checkers are on the bar initially
-#
-#     def test_get_board_state(self):
-#         board = Board()
-#         dice = Dice()
-#         player1 = Player("Player 1", black)
-#         player2 = Player("Player 2", white)
-#         scheduler = Scheduler(player1, player2)
-#         judge = None  # Replace with a mock or actual Judge instance if needed
-#         game = Backgammon(player1, player2, board, dice, scheduler, judge)
-#
-#         board_state = game.get_board_state()
-#         self.assertIsInstance(board_state, list)
-#
-#     def test_move_from_bar(self):
-#         board = Board()
-#         dice = Dice()
-#         player1 = Player("Player 1", black)
-#         player2 = Player("Player 2", white)
-#         scheduler = Scheduler(player1, player2)
-#         judge = None  # Replace with a mock or actual Judge instance if needed
-#         game = Backgammon(player1, player2, board, dice, scheduler, judge)
-#
-#         # Assuming the board and dice are set up for this test
-#         game.move_from_bar(0)  # Replace 0 with the index of the dice to use
-#
-#     def test_move(self):
-#         board = Board()
-#         dice = Dice()
-#         player1 = Player("Player 1", black)
-#         player2 = Player("Player 2", white)
-#         scheduler = Scheduler(player1, player2)
-#         judge = None  # Replace with a mock or actual Judge instance if needed
-#         game = Backgammon(player1, player2, board, dice, scheduler, judge)
-#
-#         # Assuming the board and dice are set up for this test
-#         game.move(0, 0)  # Replace 0, 0 with the actual positions and dice index
+class TestBackgammon(unittest.TestCase):
+    def setUp(self):
+        self.player_b = Player(black, "pepe")
+        self.player_w = Player(white, "joaco")
+        self.backgammon = Backgammon(self.player_b, self.player_w,)
+
+    def test_whit_players(self):
+        self.backgammon.with_players("joaco", "pepe")
+        name1 = self.backgammon._Backgammon__player1.get_name()
+        self.assertEqual(name1, "joaco")
+        name2 = self.backgammon._Backgammon__player2.get_name()
+        self.assertEqual(name2, "pepe")
+
+    def test_whit_players_same_name(self):
+        with self.assertRaises(ValueError):
+            self.backgammon.with_players("joaco", "joaco")
+
+    def test_get_players(self):
+        p1, p2 = self.backgammon.get_players()
+        self.assertEqual(p1.get_name(), "pepe")
+        self.assertEqual(p2.get_name(), "joaco")
+
+    def test_start_game(self):
+        result, starter_player = self.backgammon.start_game()
+        name1 = self.backgammon._Backgammon__player1.get_name()
+        name2 = self.backgammon._Backgammon__player2.get_name()
+        self.assertIn(name1, result)
+        self.assertIn(name2, result)
+        self.assertIn(starter_player.get_name(), [name1, name2])
+
+    def test_move_invalid_position(self):
+        self.backgammon.start_game()
+        with self.assertRaises(Exception):
+            self.backgammon.move(-2, 1)
+
+    def test_move_occupied(self):
+        mock_scheduler = Scheduler()
+        mock_scheduler._Scheduler__turn = self.backgammon.get_players()[0]
+        mock_dice = Dice()._Dice__values = [3, 5]
+        self.backgammon._Backgammon__scheduler = mock_scheduler
+        self.backgammon._Backgammon__dice = mock_dice
+        self.backgammon.move(6, 2)
+
+    

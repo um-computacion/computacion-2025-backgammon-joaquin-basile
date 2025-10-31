@@ -50,11 +50,31 @@ class TestBoard(unittest.TestCase):
         self.assertTrue(result)
 
     def test_move_from_black_bar(self):
-        self.board_with_stole_checkers.move_from_bar(self.player1, 4)
+        self.board_with_stole_checkers.move_from_bar(self.player1, 2)
         board = self.board_with_stole_checkers.get_board_state()
-        self.assertEqual(board[-3].get_quantity(), 1)
+        self.assertEqual(board[22].get_quantity(), 1)
 
     def test_move_from_white_bar(self):
         self.board_with_stole_checkers.move_from_bar(self.player2, 4)
         board = self.board_with_stole_checkers.get_board_state()
         self.assertEqual(board[3].get_quantity(), 1)
+
+    # def test_won_checker_black(self):
+    #     board = Board(self.judge)
+    #     mock_board = [Point(white, 1)] * 25
+    #     for i in range(0, 6):
+    #         mock_board[i] = Point(black, 1)
+    #     board._Board__points = mock_board
+    #
+    #     # Debe fallar por no ser numero exacto
+    #     with self.assertRaises(InvalidMove):
+    #         board.move_checker(self.player1, 1, 6)
+    #     
+    #     board.move_checker(self.player1, 6, 6)
+    #     self.assertEqual(self.judge.get_points()[self.player1], 1)
+    #     self.assertEqual(board.get_board_state()[5].get_quantity(), 0)
+    #
+    #     with self.assertRaises(InvalidMove):
+    #         board.move_checker(self.player1, 1, 6)
+    #
+

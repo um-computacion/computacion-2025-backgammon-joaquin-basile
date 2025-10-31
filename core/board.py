@@ -35,29 +35,25 @@ class Board:
     def move_checker(self, player: Player, index: int, dice_number: int):
         from_pos = index - 1
         pos_to_move = (from_pos) + (dice_number * player.get_sign())
-        if self.__points[from_pos].get_quantity() < 0:
+        if self.__points[from_pos].get_quantity() <= 0:
             raise InvalidMove("No hay fichas en la posicion indicada")
-        if player.get_color() != self.__points[from_pos]: 
+        if player.get_color() != self.__points[from_pos].get_color(): 
             raise InvalidMove("La ficha en la posicion indicada no es tuya")
-        
-        if pos_to_move < 0 or pos_to_move > 23:
-            self.move_out_board(player, from_pos, dice_number)
+
+        if pos_to_move >= 0 and pos_to_move <= 23:
+            stole = self.__points[pos_to_move].add_checker(player.get_color())
+            self.__points[from_pos].del_checker()
+            if stole: 
+                self.__bar[player.get_oponent_color()] += 1
         else:
-            self.move_in_board(from_pos, pos_to_move)
+            if not self.__judge.is_all_checkers_at_final(player, self.__points):
+                raise InvalidMove("No todas las fichas estan en el cuadrante final")
 
-    def move_in_board(from_pos: int, pos_to_move: int):
-        stole = self.__points[pos_to_move].add_checker(player.get_color())
-        self.__points[from_pos].del_checker()
-        if stole:
-            self.__bar[player.get_oponent_color()] += 1
+            if not self.__judge.can_checker_exit(player, from_pos, self.__points, dice_number):
+                raise InvalidMove("No es posible sacar la ficha con el valor del dado")
 
-    def move_out_board(self, player: Player, from_pos: int, dice_number: int):
-        if not self.__judge.is_all_checkers_at_final(player, self.__points):
-            raise InvalidMove("No todas las fichas estan en el cuadrante final")
-        if not self.__judge.can_checker_exit(player, self.__points):
-            raise InvalidMove("No es posible sacar la ficha con el valor del dado")
-        self.__points[from_pos].del_checker()
-        self.__judge.won_checker(player)
+            self.__points[from_pos].del_checker()
+            self.__judge.won_checker(player)
 
     def move_from_bar(self, player: Player, dice_number: int):
         from_pos = 0
