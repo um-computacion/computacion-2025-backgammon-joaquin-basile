@@ -1,5 +1,7 @@
 from core.point import Point
 from core.const import black, white
+from core.judge import Judge
+from core.player import Player
 from core.exceptions import InvalidMove 
 
 class Board:
@@ -15,7 +17,7 @@ class Board:
         get_board_state(): Devuelve el estado actual del tablero
         is_checker_on_bar(): Revisa si el jugador tiene fichas robadas
     '''
-    def __init__(self):
+    def __init__(self, judge: Judge):
         # Estado inicial del tablero segun las reglas
         self.__points = [
         Point(white, 2), Point('', 0), Point('', 0), Point('', 0), Point('', 0), Point(black, 5),
@@ -25,28 +27,50 @@ class Board:
         Point(white, 5), Point('', 0), Point('', 0), Point('', 0), Point('', 0), Point(black, 2)
         ]
         self.__bar = {black: 0, white: 0}
+        self.__judge = judge
 
-    def is_checker_on_bar(self, player)-> bool:
+    def is_checker_on_bar(self, player: Player)-> bool:
         return self.__bar[player.get_color()] > 0
     
-    def move_checker(self, player, index, dice_number):
+    def move_checker(self, player: Player, index: int, dice_number: int):
         from_pos = index - 1
         pos_to_move = (from_pos) + (dice_number * player.get_sign())
-        backup_points = self.__points.copy()
-        stole: bool
-        try:
-            self.__points[from_pos].del_checker()
-            stole = self.__points[pos_to_move].add_checker(player.get_color())
-        except:
-            self.__points = backup_points
-            raise InvalidMove("Movimiento invalido") 
+        if self.__points[from_pos].get_quantity() < 0:
+            raise InvalidMove("No hay fichas en la posicion indicada")
+        if player.get_color() != self.__points[from_pos]: 
+            raise InvalidMove("La ficha en la posicion indicada no es tuya")
+        
+        if pos_to_move < 0 or pos_to_move > 23:
+            self.move_out_board(player, from_pos, dice_number)
+        else:
+            self.move_in_board(from_pos, pos_to_move)
+
+    def move_in_board(from_pos: int, pos_to_move: int):
+        stole = self.__points[pos_to_move].add_checker(player.get_color())
+        self.__points[from_pos].del_checker()
         if stole:
             self.__bar[player.get_oponent_color()] += 1
 
-    def move_from_bar(self, player, dice_number):
-        pos_to_move = (dice_number - 1) * player.get_sign()
-        self.__points[pos_to_move].add_checker(player.get_color())
+    def move_out_board(self, player: Player, from_pos: int, dice_number: int):
+        if not self.__judge.is_all_checkers_at_final(player, self.__points):
+            raise InvalidMove("No todas las fichas estan en el cuadrante final")
+        if not self.__judge.can_checker_exit(player, self.__points):
+            raise InvalidMove("No es posible sacar la ficha con el valor del dado")
+        self.__points[from_pos].del_checker()
+        self.__judge.won_checker(player)
+
+    def move_from_bar(self, player: Player, dice_number: int):
+        from_pos = 0
+        if player.get_color() == black:
+            from_pos = 24
+        else:
+            from_pos = -1
+        pos_to_move = from_pos + (dice_number * player.get_sign())
+
+        stole = self.__points[pos_to_move].add_checker(player.get_color())
         self.__bar[player.get_color()] -= 1
+        if stole:
+            self.__bar[player.get_oponent_color()] += 1
 
     def get_board_state(self)-> list[Point]:
         return self.__points

@@ -19,21 +19,34 @@ class TestDice(unittest.TestCase):
 
     def test_use_dice(self):
         dice = Dice()
-        dice.roll()
-        initial_values = dice.get_values()
-        used_value1 = dice.use_dice(1)
-        self.assertEqual(used_value1, initial_values[0])
-        used_value2 = dice.use_dice(2)
-        self.assertEqual(used_value2, initial_values[1])
+        initial_values = dice.roll()
 
-    def test_is_use(self):
+        dice.use_dice(1)
+        used_value1 = dice.get_used()[0]
+        self.assertTrue(dice.get_used()[0])
+
+        dice.use_dice(2)
+        used_value2 = dice.get_used()[1]
+        self.assertTrue(dice.get_used()[1])
+
+    def test_use_dice_out_index(self):
         dice = Dice()
         dice.roll()
-        self.assertFalse(dice.is_use(1))
-        self.assertFalse(dice.is_use(2))
+        with self.assertRaises(Exception):
+            dice.use_dice(3)
+
+    def test_use_used_dice(self):
+        dice = Dice()
+        dice.roll()
         dice.use_dice(1)
-        self.assertTrue(dice.is_use(1))
-        self.assertFalse(dice.is_use(2))
+        with self.assertRaises(Exception):
+            dice.use_dice(1)
+
+    def test_is_all_use(self):
+        dice = Dice()
+        dice.roll()
+        self.assertFalse(dice.is_all_used())
+        dice.use_dice(1)
         dice.use_dice(2)
-        self.assertTrue(dice.is_use(1))
-        self.assertTrue(dice.is_use(2))
+        self.assertTrue(dice.is_all_used())
+

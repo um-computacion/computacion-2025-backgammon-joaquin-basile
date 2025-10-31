@@ -28,10 +28,7 @@ class CLI:
                 print("Turno de ", player.get_name())
                 print("Juegan las ", player.get_color())
                 print("Se estan tirando los dados...")
-                dados = self.__backgammon.trow_dice()
-                sleep(2)
-                print("Primer dado: ", dados[0])
-                print("Segundo dado: ", dados[1])
+                self.__backgammon.trow_dice()
                 self.turn()
                 self.__backgammon.next_turn()
 
@@ -39,17 +36,41 @@ class CLI:
             print("\nSe termino el juego!")
 
     def turn(self):
+        self.display_board()
+        if self.__backgammon.is_checker_on_bar():
+            self.turn_whith_bar()
+        else:
+            self.turn_whithout_bar()
+
+    def turn_whithout_bar(self):
+        pos = int(input("Que ficha mover (ingresar punto 1-24): "))
+        dice_to_use = int(input("Que dado usar (1 o 2): "))
         try:
-            for i in range(2):
-                self.display_board()
-                pos = int(input("Que ficha mover: "))
-                dado = int(input("Que dado usar: "))
-                self.__backgammon.move(pos, dado)
+            self.__backgammon.move(pos, dice_to_use)
         except Exception as e:
             print(e)
+            self.ask_ommit_turn()
             self.turn()
-        self.__backgammon.next_turn()
-        
+        if not self.__backgammon.is_all_dice_used():
+            self.turn()
+    
+    def turn_whith_bar(self):   
+        print("Tienes fichas en el bar!!")
+        dice_to_use = int(input("Que dado usar (1 o 2): "))
+        try:
+            self.__backgammon.move_from_bar(dice_to_use)
+        except Exception as e:
+            print(e)
+            self.ask_omit_turn()
+            self.turn()
+        if not self.__backgammon.is_all_dice_used():
+            self.turn()
+    
+    def ask_omit_turn(self):
+        omit = input("Desea omitir el turno? (o para omitir): ")
+        if omit.lower() == 'o':
+            self.__backgammon.next_turn()
+
     def display_board(self):
         points = self.__backgammon.get_board_state()
         bar = self.__backgammon.get_bar_state()
@@ -129,4 +150,13 @@ class CLI:
         print("\n" + "-"*70)
         print(f"Leyenda: {symbols[black]} = Negro (bk) ->  |  {symbols[white]} = Blanco (wh) <-")
         print(f"BAR: Negro {symbols[black]} = {bar[black]}  |  Blanco {symbols[white]} = {bar[white]}")
+        print(f"Turno de {self.__backgammon.actual_player().get_name()}")
+        print(f"Dados disponibles: ")
+        dices = self.__backgammon.get_dice_values()
+        used = self.__backgammon.get_used_dice()
+        if not used[0]:
+            print(f"1: {dices[0]}")
+        if not used[1]:
+            print(f"2: {dices[1]}")
+
         print("="*70 + "\n")
