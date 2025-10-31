@@ -9,6 +9,7 @@ class TestJudge(unittest.TestCase):
         self.player1 = Player("Joaco", black)
         self.player2 = Player("Pepe", white)
         self.judge = Judge(self.player1, self.player2)
+        self.mock_board = [Point("", 0)] * 24
 
     def test_won_checker_player1(self):
         self.judge.won_checker(self.player1)
@@ -33,20 +34,60 @@ class TestJudge(unittest.TestCase):
         self.assertEqual(result, None)
 
     def test_is_all_at_final_black(self):
-        mock_board = [Point("", 0)] * 25
-        for i in range(18, 24):
-            mock_board[i] = Point(black, 1)
-        result = self.judge.is_all_checkers_at_final(self.player1, mock_board)
+        for i in range(0, 6):
+           self.mock_board[i] = Point(black, 1)
+        result = self.judge.is_all_checkers_at_final(self.player1, self.mock_board)
         self.assertTrue(result)
 
     def test_is_all_at_final_white(self):
-        mock_board = [Point("", 0)] * 25
-        for i in range(0, 6):
-            mock_board[i] = Point(white, 1)
-        result = self.judge.is_all_checkers_at_final(self.player2, mock_board)
+        for i in range(18, 24):
+            self.mock_board[i] = Point(white, 1)
+        result = self.judge.is_all_checkers_at_final(self.player2, self.mock_board)
         self.assertTrue(result)
 
     def test_is_all_at_final_fail(self):
-        mock_board = [Point(black, 1)] * 25
-        result = self.judge.is_all_checkers_at_final(self.player1, mock_board)
+        self.mock_board[15] = Point(black, 2)
+        result = self.judge.is_all_checkers_at_final(self.player1, self.mock_board)
         self.assertFalse(result)
+
+
+    def test_last_chcker_black(self):
+        self.mock_board[1] = Point(black, 1)
+        self.mock_board[3] = Point(black, 1)
+        last_checker = self.judge.last_checker_pos(self.mock_board, black)
+        self.assertEqual(last_checker, 3)
+
+    def test_last_chcker_white(self):
+        self.mock_board[23] = Point(white, 1)
+        self.mock_board[22] = Point(white, 1)
+        last_checker = self.judge.last_checker_pos(self.mock_board, white)
+        self.assertEqual(last_checker, 22)
+
+
+    def test_can_checker_exit_exact_black(self):
+        self.mock_board[3] = Point(black, 1)
+        result = self.judge.can_checker_exit(self.player1, 3, self.mock_board, 4)
+        self.assertTrue(result)
+
+    def test_can_checker_exit_exact_white(self):
+        self.mock_board[22] = Point(white, 1)
+        result = self.judge.can_checker_exit(self.player2, 22, self.mock_board, 2)
+        self.assertTrue(result)
+
+    def test_can_checker_exit_higher_black(self):
+        self.mock_board[2] = Point(black, 1)
+        self.mock_board[3] = Point(black, 1)
+        result = self.judge.can_checker_exit(self.player1, 2, self.mock_board, 6)
+        self.assertFalse(result)
+        result = self.judge.can_checker_exit(self.player1, 3, self.mock_board, 6)
+        self.assertTrue(result)
+    
+    def test_can_checker_exit_higher_white(self):
+        self.mock_board[22] = Point(white, 1)
+        self.mock_board[21] = Point(white, 1)
+        result = self.judge.can_checker_exit(self.player2, 22, self.mock_board, 6)
+        self.assertFalse(result)
+        result = self.judge.can_checker_exit(self.player2, 21, self.mock_board, 6)
+        self.assertTrue(result)
+
+
