@@ -35,13 +35,6 @@ class TestDice(unittest.TestCase):
         with self.assertRaises(Exception):
             dice.use_dice(3)
 
-    def test_use_used_dice(self):
-        dice = Dice()
-        dice.roll()
-        dice.use_dice(1)
-        with self.assertRaises(Exception):
-            dice.use_dice(1)
-
     def test_is_all_use(self):
         dice = Dice()
         dice.roll()

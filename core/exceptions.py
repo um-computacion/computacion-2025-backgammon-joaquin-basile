@@ -5,3 +5,7 @@ class InvalidMove(Exception):
 class NoCheckers(Exception):
     """Exception raised when attempting to remove a checker from an empty point."""
     pass
+
+
+class OmitTurn(Exception):
+    pass

@@ -39,7 +39,7 @@ class Point():
             return True
 
         else:
-            raise InvalidMove()
+            raise InvalidMove("No se puede mover si el oponenete tiene más de una ficha")
 
     def del_checker(self)-> None:
         self.__quantity -= 1

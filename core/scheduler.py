@@ -11,10 +11,10 @@ class Scheduler:
         current_player()-> Player: Devuelve el turno actual
         next_turn(): Cambia al siguiente turno
     '''
-    def __init__(self, player1, player2):
+    def __init__(self, playerB, playerW):
         self.__turn = None
-        self.__player1 = player1
-        self.__player2 = player2
+        self.__playerB = playerB
+        self.__playerW = playerW
 
 
     def start(self, starter_player: Player):
@@ -22,7 +22,11 @@ class Scheduler:
 
     def get_turn(self)-> Player:
         return self.__turn
+
+    def get_players(self)-> tuple[Player, Player]:
+        return self.__playerB, self.__playerW
+    
     
     def next_turn(self)-> Player:
-        self.__turn = self.__player1 if self.__turn is self.__player2 else self.__player2
+        self.__turn = self.__playerB if self.__turn is self.__playerW else self.__playerW
         return self.__turn
