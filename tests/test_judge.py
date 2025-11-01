@@ -24,7 +24,7 @@ class TestJudge(unittest.TestCase):
         self.assertEqual(points[self.player2], 1)
 
     def test_check_winner(self):
-        for _i in range(12):
+        for _ in range(15):
             self.judge.won_checker(self.player1)
         winner = self.judge.check_winner()
         self.assertEqual(winner, self.player1)

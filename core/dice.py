@@ -12,7 +12,7 @@ class Dice:
         get_values(): Obtener los valores actuales de los dados
     '''
     def __init__(self):
-        self.__values: dict[int] = [0, 0]
+        self.__values: list[int] = [0, 0]
         self.__used: list[bool] = [False, False]
 
     def roll(self)-> list[int]:
@@ -30,6 +30,12 @@ class Dice:
         Devuelve ambos valores
         """
         return self.__values
+
+    def set_values(self, values: list[int]):
+        self.__values = values
+
+    def set_used(self, used: list[bool]):
+        self.__used = used
     
     def get_value(self, index: int)-> int:
         """

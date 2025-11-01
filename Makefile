@@ -1,5 +1,5 @@
 test:
-	python -m unittest discover
+	pytest
 develop:
 	nix develop ./.nix-develop-cache
 cache:

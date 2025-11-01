@@ -19,20 +19,12 @@ class Backgammon:
         end_game(): Termina el juego
     '''
     def __init__(
-            self,
-            playerB: Player = None,
-            playerW: Player = None,
-            judge: Judge = None,
-            scheduler: Scheduler = None,
-            dice: Dice = Dice(),
-            board: Board = None,
+            self
         ):
-        self.__playerB = playerB
-        self.__playerW = playerW
-        self.__judge = judge
-        self.__scheduler = scheduler
-        self.__dice = dice
-        self.__board = board
+        self.__judge: Judge 
+        self.__scheduler: Scheduler
+        self.__board: Board
+        self.__dice = Dice()
 
     #Metodos backgammon
     def with_players(self, name1, name2)-> None:
@@ -69,7 +61,8 @@ class Backgammon:
         Mueve una ficha en el tablero
         Se indica que ficha y tambien cual de los dos dados usar
         """
-        if self.__dice.is_used(dice):
+        used = self.__dice.is_used(dice)
+        if used:
             raise Exception("El dado seleccionado ya fue usado")
         current_player = self.__scheduler.get_turn()
         dice_number = self.__dice.get_value(dice)
@@ -88,8 +81,8 @@ class Backgammon:
         self.__board.move_from_bar(current_player, dice_number)
         self.__dice.use_dice(dice)
 
-    def end_game(self)-> bool:
-        return False
+    def get_winner(self)-> Player:
+        return self.__judge.check_winner()
 
     ## Metodos de dice
     def trow_dice(self)-> list[int]:
@@ -102,10 +95,12 @@ class Backgammon:
         return self.__dice.is_all_used()
 
     ## Metodos de scheduler
-    def actual_player(self):
+    def actual_player(self)-> Player:
         return self.__scheduler.get_turn()
     def next_turn(self):
         self.__scheduler.next_turn()
+    def get_players(self)-> tuple[Player, Player]:
+        return self.__scheduler.get_players()
 
     ## Metodos de board
     def is_checker_on_bar(self)-> bool:

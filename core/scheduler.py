@@ -26,6 +26,7 @@ class Scheduler:
     def get_players(self)-> tuple[Player, Player]:
         return self.__playerB, self.__playerW
     
+    
     def next_turn(self)-> Player:
         self.__turn = self.__playerB if self.__turn is self.__playerW else self.__playerW
         return self.__turn

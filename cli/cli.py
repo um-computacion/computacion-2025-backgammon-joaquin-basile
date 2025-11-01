@@ -11,7 +11,7 @@ class CLI:
             self, 
             backgammon: Backgammon = Backgammon()
         ):
-        self.__backgammon = Backgammon()
+        self.__backgammon = backgammon
 
     def start_cli(self):
         try:
@@ -26,12 +26,14 @@ class CLI:
                 sleep(1)
                 print(v , "saco ", result[v])
 
-            while not self.__backgammon.end_game():
+            while self.__backgammon.get_winner() is None:
                 sleep(1)
                 player = self.__backgammon.actual_player()
                 self.__backgammon.trow_dice()
                 self.turn()
                 self.__backgammon.next_turn()
+
+            print(f"Gano {self.__backgammon.get_winner().get_name()}")
 
         except KeyboardInterrupt:
             print("\nSe termino el juego!")

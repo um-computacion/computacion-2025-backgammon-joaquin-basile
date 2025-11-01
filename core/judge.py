@@ -10,12 +10,12 @@ class Judge:
     Methods:
         
     '''
-    def __init__(self, player1: Player, player2: Player):
-        self.__won_checkers: dict[str, int] = {player1: 0, player2: 0}
+    def __init__(self, playerB: Player, playerW: Player):
+        self.__won_checkers: dict[str, int] = {playerB: 0, playerW: 0}
 
     def check_winner(self) -> Player | None:
         for player, won_checkers in self.__won_checkers.items():
-            if won_checkers >= 12:
+            if won_checkers >= 15:
                 return player
         return None
     
