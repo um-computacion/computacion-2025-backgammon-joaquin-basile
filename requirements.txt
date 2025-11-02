@@ -1,0 +1,13 @@
+pytest
+coverage
+requests
+pandas
+numpy
+matplotlib
+seaborn
+scipy
+scikit-learn
+statsmodels
+lxml
+beautifulsoup4
+pylint
