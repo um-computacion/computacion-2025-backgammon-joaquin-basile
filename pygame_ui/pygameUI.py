@@ -1,9 +1,11 @@
 import pygame
+from time import sleep
 from core.backgammon import Backgammon
 from pygame_ui.pointManager import PointManager
 from pygame_ui.text import Text
 from pygame_ui.dice import Dice
 from core.const import black, white
+from pygame_ui.homeScreen import HomeScreen
 
 class PygameUI:
     '''
@@ -13,7 +15,7 @@ class PygameUI:
         pygame.init()
         pygame.font.init()
         self.__backgammon = backgammon
-        self.__running = True
+        self.__running = True 
         self.__scale = scale
 
         self.__bg_image = pygame.image.load('./assets/board.png')
@@ -26,6 +28,7 @@ class PygameUI:
         )
         self.__screen = pygame.display.set_mode((self.__bg_image.get_width() + 700, self.__bg_image.get_height()))
         self.__screen_w, self.__screen_h = self.__screen.get_size()
+        self.__home_screen = HomeScreen(self.__backgammon, self.__screen)
 
         # Inicializar el PointManager
         self.__point_manager = PointManager(
@@ -40,19 +43,17 @@ class PygameUI:
         align_y = self.__screen_h / 2
 
         self.__title = Text(aling_x, align_y - 0.80*align_y, "Backgammon", font_size=80, color=(0, 0, 0))
-        self.__turn_msg = Text(aling_x-20, align_y, "Estado del juego", font_size=50, color=(0, 0, 0))
-        self.__bar_msg = Text(aling_x-20, align_y + 40, "Fichas en el bar", font_size=50, color=(0, 0, 0))
+        self.__turn_msg = Text(aling_x-20, align_y, "", font_size=50, color=(0, 0, 0))
+        self.__bar_msg = Text(aling_x-20, align_y + 40, "", font_size=50, color=(0, 0, 0))
         self.__won_checkers_msg = Text(aling_x-20, align_y + 80, "", font_size=40, color=(0, 150, 0))
-        self.__error_msg = Text(aling_x-30, align_y + 0.90*align_y, "Un error cualquier de pruebita", font_size=30, color=(255, 50, 50))
+        self.__error_msg = Text(aling_x-30, align_y + 0.90*align_y, "", font_size=30, color=(255, 50, 50))
 
         self.__clock = pygame.time.Clock()
         self.__debug_mode = False
 
     def start(self):
-        # name1 = input("Ingrese el nombre del jugador 1 (fichas negras): ")
-        # name2 = input("Ingrese el nombre del jugador 2 (fichas blancas): ")
-        self.__backgammon.with_players("joaco", "jero")
-        result = self.__backgammon.start_game()
+        self.__home_screen.render()
+        self.__backgammon.start_game()
         self.run()
 
     def set_msg_state(self):
@@ -173,4 +174,15 @@ class PygameUI:
             self.__backgammon.trow_dice()
 
     def show_winner(self):
-        print("El ganador es ...")
+        self.__screen.fill((255, 255, 255))
+        text_winer = Text(
+            self.__screen_w // 2,
+            self.__screen_h // 2,
+            f"El ganador es: {self.__backgammon.get_winner().get_name()}!!!",
+            font_size=80,
+            color=(0, 150, 0)
+        )
+        text_winer.render(self.__screen)
+        pygame.display.flip()
+        sleep(3)
+

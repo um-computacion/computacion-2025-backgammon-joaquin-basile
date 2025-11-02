@@ -29,7 +29,9 @@ class Text():
 
     def set_surface(self):
         self.__text_surface = self.__font.render(self.__content, True, self.__color)
-
+    
+    def get_surface(self):
+        return self.__text_surface
     def get_content(self):
         return self.content
     def get_font_size(self):

@@ -1,5 +1,4 @@
 import pygame
-from pygame_ui.utils import highlight_surface
 
 class Dice():
     def __init__(self, screen: pygame.Surface, pos_dice: tuple[int, int]):
@@ -20,6 +19,15 @@ class Dice():
     def set_pos(self, pos_dice: tuple[int, int]):
         self.__dice1_pos = (pos_dice[0], pos_dice[1] + 65)
         self.__dice2_pos = (pos_dice[0], pos_dice[1])
+
+    def highlight_surface(self, surface, color=(255, 255, 0), alpha=50):
+        """Añade un efecto de brillo a una surface"""
+        highlighted = surface.copy()
+        overlay = pygame.Surface(surface.get_size())
+        overlay.fill(color)
+        overlay.set_alpha(alpha)
+        highlighted.blit(overlay, (0, 0))
+        return highlighted
 
     def set_dice_values(self, dice: list[int]):
         for k, d in enumerate(dice):
@@ -45,13 +53,13 @@ class Dice():
 
         if not used[0]:
             if self.__selected_dice == 1:
-                self.__screen.blit(highlight_surface(self.__dice_surface[0]), self.__dice1_pos)
+                self.__screen.blit(self.highlight_surface(self.__dice_surface[0]), self.__dice1_pos)
             else:
                 self.__screen.blit(self.__dice_surface[0], self.__dice1_pos)
 
         if not used[1]:
             if self.__selected_dice == 2:
-                self.__screen.blit(highlight_surface(self.__dice_surface[1]), self.__dice2_pos)
+                self.__screen.blit(self.highlight_surface(self.__dice_surface[1]), self.__dice2_pos)
             else:
                 self.__screen.blit(self.__dice_surface[1], self.__dice2_pos)
 
