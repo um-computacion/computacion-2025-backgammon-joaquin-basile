@@ -109,3 +109,7 @@ class Backgammon:
         return self.__board.get_board_state()
     def get_bar_state(self)-> dict:
         return self.__board.get_bar_state()
+    
+    # Metodos de judge
+    def get_won_checkers(self)-> dict[Player, int]:
+        return self.__judge.get_points()

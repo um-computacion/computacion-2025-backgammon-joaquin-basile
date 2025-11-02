@@ -1,2 +1,2 @@
-black = "bk"
-white = "wh"
+black = "negro"
+white = "blanco"

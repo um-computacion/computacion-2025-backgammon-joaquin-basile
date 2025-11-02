@@ -11,7 +11,7 @@ class Player:
     def __init__(self, name, color):
         self.__name = name
         if color != black and color != white: 
-            raise ValueError("El color tiene que ser 'bk' or 'wh'")
+            raise ValueError("El color tiene que ser blanco o negro")
         self.__color = color
         self.__sign = -1 if color == black else 1
 

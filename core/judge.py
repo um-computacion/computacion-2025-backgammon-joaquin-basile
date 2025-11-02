@@ -22,7 +22,7 @@ class Judge:
     def won_checker(self, player: Player):
         self.__won_checkers[player] += 1
 
-    def get_points(self):
+    def get_points(self)-> dict[Player, int]:
         return self.__won_checkers
 
     def is_all_checkers_at_final(self, player: Player, board: list[Point])-> bool:
