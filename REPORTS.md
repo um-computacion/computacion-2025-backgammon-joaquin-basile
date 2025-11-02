@@ -5,7 +5,7 @@
 Name                    Stmts   Miss  Cover   Missing
 -----------------------------------------------------
 cli/__init__.py             0      0   100%
-cli/cli.py                115    104    10%   14, 17-39, 42-54, 57-59, 62-64, 67-153
+cli/cli.py                115      9    92%   30-34, 86-87, 119-120
 core/__init__.py            0      0   100%
 core/backgammon.py         70     11    84%   66, 70, 77-82, 85, 91, 115
 core/board.py              44      7    84%   49-56, 69
@@ -18,7 +18,7 @@ core/point.py              25      0   100%
 core/scheduler.py          15      0   100%
 pygame_ui/__init__.py       0      0   100%
 -----------------------------------------------------
-TOTAL                     365    125    66%
+TOTAL                     365     30    92%
 
 ```
 
@@ -45,8 +45,59 @@ tests/test_judge.py:72:4: C0116: Missing function or method docstring (missing-f
 tests/test_judge.py:77:4: C0116: Missing function or method docstring (missing-function-docstring)
 tests/test_judge.py:85:4: C0116: Missing function or method docstring (missing-function-docstring)
 ************* Module tests.test_cli
+tests/test_cli.py:20:0: C0301: Line too long (101/100) (line-too-long)
+tests/test_cli.py:21:0: C0301: Line too long (105/100) (line-too-long)
+tests/test_cli.py:25:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:28:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:47:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:50:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:60:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:63:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:73:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:76:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:78:0: C0301: Line too long (101/100) (line-too-long)
+tests/test_cli.py:88:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:91:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:100:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:104:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:111:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:113:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:124:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:126:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:134:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:136:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:148:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:151:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:161:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:163:0: C0301: Line too long (101/100) (line-too-long)
+tests/test_cli.py:168:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:171:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:180:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:184:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:191:0: C0303: Trailing whitespace (trailing-whitespace)
+tests/test_cli.py:193:0: C0303: Trailing whitespace (trailing-whitespace)
 tests/test_cli.py:1:0: C0114: Missing module docstring (missing-module-docstring)
-tests/test_cli.py:4:0: C0115: Missing class docstring (missing-class-docstring)
+tests/test_cli.py:9:0: C0115: Missing class docstring (missing-class-docstring)
+tests/test_cli.py:17:44: W0613: Unused argument 'mock_sleep' (unused-argument)
+tests/test_cli.py:17:56: W0613: Unused argument 'mock_print' (unused-argument)
+tests/test_cli.py:17:68: W0613: Unused argument 'mock_input' (unused-argument)
+tests/test_cli.py:35:60: W0613: Unused argument 'mock_input' (unused-argument)
+tests/test_cli.py:42:36: W0613: Unused argument 'mock_print' (unused-argument)
+tests/test_cli.py:42:48: W0613: Unused argument 'mock_input' (unused-argument)
+tests/test_cli.py:55:33: W0613: Unused argument 'mock_print' (unused-argument)
+tests/test_cli.py:55:45: W0613: Unused argument 'mock_input' (unused-argument)
+tests/test_cli.py:68:56: W0613: Unused argument 'mock_input' (unused-argument)
+tests/test_cli.py:83:47: W0613: Unused argument 'mock_print' (unused-argument)
+tests/test_cli.py:83:59: W0613: Unused argument 'mock_input' (unused-argument)
+tests/test_cli.py:121:37: W0613: Unused argument 'mock_print' (unused-argument)
+tests/test_cli.py:121:49: W0613: Unused argument 'mock_input' (unused-argument)
+tests/test_cli.py:131:46: W0613: Unused argument 'mock_input' (unused-argument)
+tests/test_cli.py:142:39: W0613: Unused argument 'mock_print' (unused-argument)
+tests/test_cli.py:142:51: W0613: Unused argument 'mock_input' (unused-argument)
+tests/test_cli.py:157:51: W0613: Unused argument 'mock_sleep' (unused-argument)
+tests/test_cli.py:157:75: W0613: Unused argument 'mock_input' (unused-argument)
+tests/test_cli.py:2:0: W0611: Unused call imported from unittest.mock (unused-import)
+tests/test_cli.py:5:0: W0611: Unused Player imported from core.player (unused-import)
 ************* Module tests.test_scheduler
 tests/test_scheduler.py:10:62: C0303: Trailing whitespace (trailing-whitespace)
 tests/test_scheduler.py:23:0: C0305: Trailing newlines (trailing-newlines)
@@ -465,7 +516,7 @@ pygame_ui/homeScreen.py:55:4: R1710: Either all return statements in a function 
 pygame_ui/homeScreen.py:6:0: R0903: Too few public methods (1/2) (too-few-public-methods)
 
 -----------------------------------
-Your code has been rated at 6.03/10
+Your code has been rated at 5.97/10
 
 
 ```
